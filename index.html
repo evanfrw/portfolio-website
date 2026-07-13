@@ -264,54 +264,63 @@
   .cert-issuer { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
   .cert-open { display: block; text-decoration: none; color: inherit; cursor: pointer; }
   /* ============================================================
-     TEMA KUSTOM BIRU
-     Light = gradasi biru cerah | Dark = gradasi biru gelap
+     TEMA: Light = putih bersih | Dark = biru gelap gradasi
      (tombol THEME kanan-atas untuk ganti; default ikut OS)
      ============================================================ */
-  :root {                                   /* default = biru cerah */
-    --paper:#0A1230; --panel:#142150; --ink:#EAF0FF; --muted:#9BA6D8;
-    --hair:#ffffff24; --accent:#6E84FF; --accent-2:#6E84FF; --on-accent:#0A1230;
-    --bg-grad: linear-gradient(160deg, #2743E3 0%, #16266A 48%, #070C26 100%);
+  :root {                                   /* default & LIGHT = putih bersih */
+    --paper:#FAFAFB; --panel:#F2F3F5; --ink:#16171B; --muted:#6B6F77;
+    --hair:#E4E6EA; --accent:#1F3BDE; --accent-2:#1F3BDE; --on-accent:#FFFFFF;
+    --bg-grad: #FAFAFB;
   }
-  @media (prefers-color-scheme: dark) {     /* OS gelap = biru pekat */
+  @media (prefers-color-scheme: dark) {     /* OS gelap = biru gelap */
     :root {
       --paper:#050818; --panel:#0E1738; --ink:#E6ECFF; --muted:#8A96CC;
       --hair:#ffffff1c; --accent:#7E92FF; --accent-2:#7E92FF; --on-accent:#050818;
       --bg-grad: linear-gradient(160deg, #16266A 0%, #0A1230 45%, #02040E 100%);
     }
   }
-  :root[data-theme="light"] {               /* tombol -> LIGHT (biru cerah) */
-    --paper:#0A1230; --panel:#142150; --ink:#EAF0FF; --muted:#9BA6D8;
-    --hair:#ffffff24; --accent:#6E84FF; --accent-2:#6E84FF; --on-accent:#0A1230;
-    --bg-grad: linear-gradient(160deg, #2743E3 0%, #16266A 48%, #070C26 100%);
+  :root[data-theme="light"] {               /* tombol -> LIGHT (putih bersih) */
+    --paper:#FAFAFB; --panel:#F2F3F5; --ink:#16171B; --muted:#6B6F77;
+    --hair:#E4E6EA; --accent:#1F3BDE; --accent-2:#1F3BDE; --on-accent:#FFFFFF;
+    --bg-grad: #FAFAFB;
   }
-  :root[data-theme="dark"] {                /* tombol -> DARK (biru pekat) */
+  :root[data-theme="dark"] {                /* tombol -> DARK (biru gelap) */
     --paper:#050818; --panel:#0E1738; --ink:#E6ECFF; --muted:#8A96CC;
     --hair:#ffffff1c; --accent:#7E92FF; --accent-2:#7E92FF; --on-accent:#050818;
     --bg-grad: linear-gradient(160deg, #16266A 0%, #0A1230 45%, #02040E 100%);
   }
   body { background: var(--bg-grad) fixed; }
-
-  /* Grafik garis abstrak (canvas) di belakang konten */
-  /* Latar hero: dot-grid halus + glow biru lembut */
-  #bg-fx { position: absolute; top: 0; left: 0; width: 100%; height: 900px; z-index: 0; pointer-events: none; overflow: hidden;
-    background-image: radial-gradient(rgba(150,172,255,0.16) 1px, transparent 1.5px);
-    background-size: 26px 26px; background-position: -13px -13px;
-    -webkit-mask-image: linear-gradient(to bottom, #000 44%, transparent 100%);
-            mask-image: linear-gradient(to bottom, #000 44%, transparent 100%); }
-  #bg-fx::before, #bg-fx::after { content: ""; position: absolute; border-radius: 50%; filter: blur(72px); }
-  #bg-fx::before { width: 540px; height: 540px; top: -140px; right: -40px;
-    background: radial-gradient(circle, rgba(110,132,255,0.50), transparent 68%);
-    animation: fxFloatA 20s ease-in-out infinite alternate; }
-  #bg-fx::after { width: 440px; height: 440px; top: 200px; left: -100px;
-    background: radial-gradient(circle, rgba(39,67,227,0.42), transparent 68%);
-    animation: fxFloatB 26s ease-in-out infinite alternate; }
-  @keyframes fxFloatA { to { transform: translate(-46px, 44px); } }
-  @keyframes fxFloatB { to { transform: translate(54px, -32px); } }
+  /* Latar hero BEDA per tema:
+     Light = garis abstrak flowing (abu tipis) | Dark = titik-titik (dot-grid) */
+  #bg-fx { position: absolute; top: 0; left: 0; width: 100%; height: 820px; z-index: 0; pointer-events: none; overflow: hidden;
+    color: var(--muted); background-position: -13px -13px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 46%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 46%, transparent 100%); }
+  #bg-fx svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  #bg-fx path { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-opacity: .4; }
+  /* Dark: sembunyikan garis, ganti jadi titik-titik */
+  @media (prefers-color-scheme: dark) {
+    #bg-fx svg { display: none; }
+    #bg-fx { background-image: radial-gradient(rgba(150,172,255,0.34) 1px, transparent 1.6px); background-size: 24px 24px; }
+  }
+  :root[data-theme="dark"] #bg-fx svg { display: none; }
+  :root[data-theme="dark"] #bg-fx { background-image: radial-gradient(rgba(150,172,255,0.34) 1px, transparent 1.6px); background-size: 24px 24px; }
+  /* Light (dipaksa via tombol): garis tampil, titik dibuang */
+  :root[data-theme="light"] #bg-fx svg { display: block; }
+  :root[data-theme="light"] #bg-fx { background-image: none; }
   main, footer { position: relative; z-index: 1; }
 </style>
 
-<div id="bg-fx" aria-hidden="true"></div>
+<div id="bg-fx" aria-hidden="true">
+  <svg viewBox="0 0 1440 820" preserveAspectRatio="xMidYMin slice">
+    <path d="M -40 90 C 300 35 600 145 900 90 C 1140 45 1320 140 1520 90"/>
+    <path d="M -40 200 C 300 145 600 255 900 200 C 1140 155 1320 250 1520 200"/>
+    <path d="M -40 310 C 300 255 600 365 900 310 C 1140 265 1320 360 1520 310"/>
+    <path d="M -40 420 C 300 365 600 475 900 420 C 1140 375 1320 470 1520 420"/>
+    <path d="M -40 530 C 300 475 600 585 900 530 C 1140 485 1320 580 1520 530"/>
+    <path d="M -40 640 C 300 585 600 695 900 640 C 1140 595 1320 690 1520 640"/>
+  </svg>
+</div>
 
 <header>
   <div class="wrap nav">
