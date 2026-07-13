@@ -1,0 +1,81 @@
+========================================================
+ BIKIN WEBSITE PORTOFOLIO PAKAI VS CODE - PANDUAN EVAN
+========================================================
+Folder ini sudah berisi website-mu:
+  index.html  = halaman portofolio (utama)
+  login.html  = halaman login
+
+Website ini "static" (HTML/CSS/JS dalam 1 file) - jadi
+bisa langsung dibuka di browser, tanpa server ribet.
+
+--------------------------------------------------------
+LANGKAH 1 - Pasang VS Code
+--------------------------------------------------------
+1. Buka https://code.visualstudio.com
+2. Download (tombol biru), install seperti biasa.
+
+--------------------------------------------------------
+LANGKAH 2 - Buka folder project
+--------------------------------------------------------
+1. Buka VS Code.
+2. Menu: File > Open Folder...
+3. Pilih folder:  D:\Claude\Figma\portfolio-website
+4. Di panel kiri kamu akan lihat index.html & login.html.
+
+--------------------------------------------------------
+LANGKAH 3 - Lihat hasilnya (Live Preview)
+--------------------------------------------------------
+Cara cepat: klik kanan index.html di File Explorer >
+Open with > Chrome. Selesai, itu websitemu.
+
+Cara lebih enak (auto-refresh saat edit):
+1. Di VS Code, klik ikon Extensions (kotak-kotak, kiri).
+2. Cari "Live Server" (by Ritwick Dey) > Install.
+3. Buka index.html, klik tombol "Go Live" (pojok kanan
+   bawah VS Code). Browser terbuka & otomatis refresh
+   tiap kamu save (Ctrl+S).
+
+--------------------------------------------------------
+LANGKAH 4 - Edit isinya
+--------------------------------------------------------
+Buka index.html di VS Code. Yang gampang diubah:
+
+- GANTI TEKS: pakai Ctrl+F untuk cari kata, lalu ketik
+  gantinya. Contoh cari "Evan Pratama", "Pintu Wallet",
+  "emik@pnm.co.id", "Jakarta".
+
+- GANTI WARNA AKSEN: cari baris  --accent:  di bagian
+  atas (ada di <style>). Ganti kode #1F3BDE dengan warna
+  lain (mis. #E4572E oranye). Ada 3 tempat (light,
+  dark, media) - ganti semuanya biar konsisten.
+
+- GANTI LINK SOSIAL: cari "Dribbble", "LinkedIn",
+  "Instagram" - ubah href="#top" jadi URL aslinya,
+  contoh: href="https://dribbble.com/evan".
+
+Save (Ctrl+S) -> lihat perubahannya langsung di browser.
+
+--------------------------------------------------------
+LANGKAH 5 - Publish GRATIS (dapat link online)
+--------------------------------------------------------
+Cara paling gampang (tanpa install apa-apa):
+1. Buka https://app.netlify.com/drop
+2. Buat akun gratis (sekali saja).
+3. SERET folder "portfolio-website" ke halaman itu.
+4. Beberapa detik -> dapat link seperti
+   https://nama-acak.netlify.app  = websitemu online!
+5. (Opsional) di Site settings bisa ganti nama domainnya.
+
+Alternatif: GitHub Pages atau Vercel (lebih pro, pakai
+akun GitHub). Bisa aku ajarin kalau kamu mau.
+
+--------------------------------------------------------
+TIPS
+--------------------------------------------------------
+- Halaman utama = index.html (WAJIB namanya index.html
+  supaya jadi halaman pembuka saat online).
+- Mau nyambungin tombol ke halaman login? Di index.html
+  ubah salah satu link jadi  href="login.html".
+- Simpan sering (Ctrl+S). Kalau kacau, bilang ke aku,
+  aku bantu betulin.
+========================================================
