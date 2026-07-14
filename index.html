@@ -263,6 +263,32 @@
   .cert-rule { height: 1px; background: var(--hair); margin-top: 10px; }
   .cert-issuer { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
   .cert-open { display: block; text-decoration: none; color: inherit; cursor: pointer; }
+
+  /* Selected Work — galeri kartu bergambar */
+  .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 26px; }
+  @media (max-width: 760px) { .proj-grid { grid-template-columns: 1fr; } }
+  .proj { display: flex; flex-direction: column; gap: 15px; text-decoration: none; color: inherit; }
+  .proj-thumb { aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden; border: 1px solid var(--hair);
+    background: var(--panel); position: relative; transition: transform .4s cubic-bezier(.2,.7,.3,1), border-color .4s; }
+  .proj:hover .proj-thumb { transform: translateY(-6px); border-color: var(--accent); }
+  .proj-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .proj-info { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .proj-title { font-size: 1.4rem; font-weight: 560; letter-spacing: -.015em; line-height: 1.15; }
+  .proj-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .proj-yr { font-family: var(--font-mono); font-size: 13px; color: var(--muted); white-space: nowrap; padding-top: 4px; }
+
+  /* Lightbox / popup gambar project */
+  .lightbox { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center;
+    background: rgba(6,8,20,0.88); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    padding: 5vh 5vw; cursor: zoom-out; opacity: 0; transition: opacity .25s ease; }
+  .lightbox.open { display: flex; opacity: 1; }
+  .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 10px; cursor: default;
+    box-shadow: 0 24px 70px rgba(0,0,0,.55); transform: scale(.98); transition: transform .28s cubic-bezier(.2,.7,.3,1); }
+  .lightbox.open img { transform: scale(1); }
+  .lb-close { position: fixed; top: 18px; right: 22px; width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.10); color: #fff;
+    font-size: 17px; line-height: 1; cursor: pointer; transition: background .2s; }
+  .lb-close:hover { background: rgba(255,255,255,.22); }
   /* ============================================================
      TEMA: Light = putih bersih | Dark = biru gelap gradasi
      (tombol THEME kanan-atas untuk ganti; default ikut OS)
@@ -364,38 +390,48 @@
       <h2>Selected Work</h2>
       <span class="sec-idx">01 / WORK</span>
     </div>
-    <div class="work">
-      <a class="job rise" href="#contact">
-        <span class="no">01</span>
-        <div>
-          <div class="title">PNM Digital Product</div>
-          <div class="meta"><span class="tag">Financial</span><span class="tag">UI/UX</span><span class="tag">Mobile</span></div>
+    <div class="proj-grid">
+      <a class="proj rise" href="projects/pegadaian.png" target="_blank" rel="noopener">
+        <div class="proj-thumb"><img src="projects/pegadaian.png" alt="Pegadaian App Revamp" onerror="this.remove()"></div>
+        <div class="proj-info">
+          <div><div class="proj-title">Pegadaian App Revamp</div><div class="proj-tags"><span class="tag">Financial</span><span class="tag">Mobile</span></div></div>
+          <span class="proj-yr">2024</span>
         </div>
-        <div class="right"><span class="yr">2024</span><span class="go">↗</span></div>
       </a>
-      <a class="job rise" href="#contact">
-        <span class="no">02</span>
-        <div>
-          <div class="title">Health App Suite</div>
-          <div class="meta"><span class="tag">Healthcare</span><span class="tag">Multi-Platform</span><span class="tag">UI/UX</span></div>
+      <a class="proj rise" href="projects/cexup-tablet.png" target="_blank" rel="noopener">
+        <div class="proj-thumb"><img src="projects/cexup-tablet.png" alt="Cexup Health App" onerror="this.remove()"></div>
+        <div class="proj-info">
+          <div><div class="proj-title">Cexup Health App</div><div class="proj-tags"><span class="tag">Healthcare</span><span class="tag">Tablet</span></div></div>
+          <span class="proj-yr">2023</span>
         </div>
-        <div class="right"><span class="yr">2023</span><span class="go">↗</span></div>
       </a>
-      <a class="job rise" href="#contact">
-        <span class="no">03</span>
-        <div>
-          <div class="title">App &amp; Web UI Kit</div>
-          <div class="meta"><span class="tag">Mobile</span><span class="tag">Web</span><span class="tag">Prototyping</span></div>
+      <a class="proj rise" href="projects/cexup-doctor.png" target="_blank" rel="noopener">
+        <div class="proj-thumb"><img src="projects/cexup-doctor.png" alt="Cexup Doctor Dashboard" onerror="this.remove()"></div>
+        <div class="proj-info">
+          <div><div class="proj-title">Cexup Doctor Dashboard</div><div class="proj-tags"><span class="tag">Healthcare</span><span class="tag">Web</span></div></div>
+          <span class="proj-yr">2023</span>
         </div>
-        <div class="right"><span class="yr">2022</span><span class="go">↗</span></div>
       </a>
-      <a class="job rise" href="#contact">
-        <span class="no">04</span>
-        <div>
-          <div class="title">Angular Frontend Build</div>
-          <div class="meta"><span class="tag">Front-End</span><span class="tag">Responsive</span><span class="tag">Figma</span></div>
+      <a class="proj rise" href="projects/haven-laundry.png" target="_blank" rel="noopener">
+        <div class="proj-thumb"><img src="projects/haven-laundry.png" alt="Haven Laundry Mobile App" onerror="this.remove()"></div>
+        <div class="proj-info">
+          <div><div class="proj-title">Haven Laundry</div><div class="proj-tags"><span class="tag">Mobile</span><span class="tag">UI/UX</span></div></div>
+          <span class="proj-yr">2023</span>
         </div>
-        <div class="right"><span class="yr">2021</span><span class="go">↗</span></div>
+      </a>
+      <a class="proj rise" href="projects/employee-mgmt.png" target="_blank" rel="noopener">
+        <div class="proj-thumb"><img src="projects/employee-mgmt.png" alt="Employee Management" onerror="this.remove()"></div>
+        <div class="proj-info">
+          <div><div class="proj-title">Employee Management</div><div class="proj-tags"><span class="tag">Web</span><span class="tag">Dashboard</span></div></div>
+          <span class="proj-yr">2022</span>
+        </div>
+      </a>
+      <a class="proj rise" href="projects/rekalaba.png" target="_blank" rel="noopener">
+        <div class="proj-thumb"><img src="projects/rekalaba.png" alt="Rekalaba Landing Page" onerror="this.remove()"></div>
+        <div class="proj-info">
+          <div><div class="proj-title">Rekalaba Landing Page</div><div class="proj-tags"><span class="tag">Web</span><span class="tag">Landing</span></div></div>
+          <span class="proj-yr">2021</span>
+        </div>
       </a>
     </div>
   </section>
@@ -570,6 +606,11 @@
   </div>
 </footer>
 
+<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <button class="lb-close" aria-label="Tutup gambar">✕</button>
+  <img src="" alt="">
+</div>
+
 <script>
   // theme toggle — stamps data-theme, overriding the media query both ways
   (function () {
@@ -629,5 +670,36 @@
       }, { threshold: .6 });
       io.observe(el);
     });
+  })();
+
+  // Lightbox / popup gambar project
+  (function () {
+    var lb = document.getElementById('lightbox');
+    if (!lb) return;
+    var img = lb.querySelector('img');
+    var closeBtn = lb.querySelector('.lb-close');
+    function open(src, alt) {
+      img.src = src; img.alt = alt || '';
+      lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function hide() {
+      lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      setTimeout(function () { if (!lb.classList.contains('open')) img.src = ''; }, 300);
+    }
+    document.querySelectorAll('.proj, .cert-open').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var im = a.querySelector('img');
+        // utamakan gambar yang tampil (untuk cert PDF, ini PNG preview-nya)
+        var src = (im && im.getAttribute('src')) || a.getAttribute('href');
+        if (!src) return;
+        e.preventDefault();
+        open(src, im ? im.getAttribute('alt') : '');
+      });
+    });
+    closeBtn.addEventListener('click', hide);
+    lb.addEventListener('click', function (e) { if (e.target === lb) hide(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('open')) hide(); });
   })();
 </script>
